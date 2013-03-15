@@ -1,16 +1,18 @@
 source 'https://rubygems.org'
-ruby '1.9.3'
 
-gem 'rails', '3.2.12'
-gem 'jquery-rails'
 gem 'haml-rails'
+gem 'jquery-rails'
+gem 'less-rails'
 gem 'pg'
+gem 'rails', '3.2.12'
 gem 'rails-i18n'
+gem 'settingslogic'
+gem 'therubyracer'
+gem 'twitter-bootstrap-rails'
 
 group :development do
   gem 'annotate'
   gem 'better_errors'
-  # gem 'binding_of_caller'
   gem 'thin'
   gem 'meta_request'
 end
