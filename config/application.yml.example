@@ -2,6 +2,7 @@ defaults: &defaults
   authentication:
     username: ''
     password: ''
+  daily_work_hours: 8
 
 development:
   <<: *defaults

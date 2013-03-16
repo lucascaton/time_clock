@@ -42,4 +42,66 @@ describe Punch do
       end
     end
   end
+
+  describe '.worked_time' do
+    before do
+      create :punch, punched_at: Time.local(*%w(2013 03 15 08 00))
+      create :punch, punched_at: Time.local(*%w(2013 03 15 16 05))
+      create :punch, punched_at: Time.local(*%w(2013 03 16 08 00))
+      create :punch, punched_at: Time.local(*%w(2013 03 16 17 05))
+    end
+
+    context 'without a date' do
+      it 'returns a string with the worked time' do
+        expect(described_class.worked_time).to eql('17 hours, 10 minutes')
+      end
+    end
+
+    context 'with a date' do
+      it 'returns a string with the worked time' do
+        date = Date.new 2013, 03, 16
+        expect(described_class.worked_time(date)).to eql('9 hours, 5 minutes')
+      end
+    end
+  end
+
+  describe '.worked_time_balance' do
+    before do
+      create :punch, punched_at: Time.local(*%w(2013 03 15 08 00))
+      create :punch, punched_at: Time.local(*%w(2013 03 15 16 05))
+      create :punch, punched_at: Time.local(*%w(2013 03 16 08 00))
+      create :punch, punched_at: Time.local(*%w(2013 03 16 17 05))
+    end
+
+    context 'without a date' do
+      it 'returns a string with the worked time balance' do
+        expect(described_class.worked_time_balance).to eql('+ 1 hour, 10 minutes')
+      end
+    end
+
+    context 'with a date' do
+      it 'returns a string with the worked time balance' do
+        date = Date.new 2013, 03, 16
+        expect(described_class.worked_time_balance(date)).to eql('+ 1 hour, 5 minutes')
+      end
+    end
+
+    context 'with a negative balance' do
+      it 'returns a string with the worked time balance' do
+        create :punch, punched_at: Time.local(*%w(2013 03 17 08 00))
+        create :punch, punched_at: Time.local(*%w(2013 03 17 09 00))
+
+        expect(described_class.worked_time_balance).to eql('- 5 hours, 50 minutes')
+      end
+    end
+
+    context 'with a perfect balance' do
+      it 'returns "OK"' do
+        create :punch, punched_at: Time.local(*%w(2013 03 17 08 00))
+        create :punch, punched_at: Time.local(*%w(2013 03 17 14 50))
+
+        expect(described_class.worked_time_balance).to eql('OK')
+      end
+    end
+  end
 end
