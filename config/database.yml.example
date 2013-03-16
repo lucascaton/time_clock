@@ -1,0 +1,14 @@
+defaults: &defaults
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username:
+  password:
+
+development:
+  <<: *defaults
+  database: time_clock_development
+
+test:
+  <<: *defaults
+  database: time_clock_test
