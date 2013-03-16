@@ -4,6 +4,12 @@ Time Clock is a simple system that allows a user to register their punch ins and
 
 # How to setup
 
+# Screenshots
+
+![Screenshot browser](https://raw.github.com/lucascaton/time_clock/master/screenshots/screenshot_browser.png)
+
+![Screenshot iPhone](https://raw.github.com/lucascaton/time_clock/master/screenshots/screenshot_iphone.png)
+
 ## Licence
 
 Copyright (c) 2013 Lucas Caton
