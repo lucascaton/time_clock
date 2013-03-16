@@ -22,10 +22,10 @@ group :development, :test do
 end
 
 group :test do
-  # gem 'capybara'
+  gem 'capybara'
   gem 'factory_girl_rails'
   gem 'forgery'
-  # gem 'poltergeist'
+  gem 'poltergeist'
   gem 'rspec-rails'
   gem 'simplecov', require: false
 end

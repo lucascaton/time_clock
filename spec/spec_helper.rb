@@ -4,9 +4,9 @@ SimpleCov.start
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
-# require 'capybara/rspec'
-# require 'capybara/rails'
-# require 'capybara/poltergeist'
+require 'capybara/rspec'
+require 'capybara/rails'
+require 'capybara/poltergeist'
 
 Rails.logger.level = 4 # reduce the IO during tests
 
@@ -28,13 +28,13 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
-  # config.include AcceptanceMacros, type: :feature
+  config.include AcceptanceMacros, type: :feature
   config.include FactoryGirl::Syntax::Methods
 end
 
-# Capybara.configure do |config|
-#   config.javascript_driver      = :poltergeist
-#   config.ignore_hidden_elements = true
-#   config.default_selector       = :css
-#   config.default_wait_time      = 10
-# end
+Capybara.configure do |config|
+  config.javascript_driver      = :poltergeist
+  config.ignore_hidden_elements = true
+  config.default_selector       = :css
+  config.default_wait_time      = 10
+end

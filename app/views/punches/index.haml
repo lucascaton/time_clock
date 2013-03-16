@@ -1,0 +1,28 @@
+=form_for @punch do |f|
+  .well
+    .center
+      =f.datetime_select :punched_at
+      %br
+      =f.submit 'Punch!', class: 'btn btn-success'
+
+.well.center
+  %h2=Punch.worked_time_balance
+
+-@punches.group_by{ |punch| punch.punched_at.to_date }.each do |date, punches|
+  .pull-left
+    %h4="#{date} (#{Punch.worked_time(date)})"
+  .pull-right
+    %h4="#{Punch.worked_time_balance(date)}"
+
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th IP
+        %th Time
+        %th Actions
+    %tbody
+      -punches.each do |punch|
+        %tr
+          %td=punch.origin_ip
+          %td=punch.punched_at.strftime '%H:%M'
+          %td=link_to 'Remove', punch_path(punch), method: 'delete', class: 'btn btn-danger btn-small', confirm: 'Are you sure?'

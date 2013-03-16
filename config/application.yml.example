@@ -9,3 +9,6 @@ development:
 
 test:
   <<: *defaults
+  authentication:
+    username: 'admin'
+    password: 'secret'

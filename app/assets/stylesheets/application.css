@@ -16,6 +16,9 @@ body {
   display: none;
 }
 
+form#new_punch select{
+  width: auto;
+}
 
 footer{
   margin-top: 40px;
