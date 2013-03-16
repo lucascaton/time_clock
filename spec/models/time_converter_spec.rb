@@ -1,6 +1,6 @@
 require File.expand_path('../../../app/models/time_converter', __FILE__)
 
-describe TimeConverter, focus: true do
+describe TimeConverter do
   describe '#to_time' do
     it 'returns a formatted time' do
       seconds = 1 # 1 second
