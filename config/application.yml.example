@@ -1,0 +1,10 @@
+defaults: &defaults
+  authentication:
+    username: ''
+    password: ''
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
