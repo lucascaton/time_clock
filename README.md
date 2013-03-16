@@ -4,6 +4,28 @@ Time Clock is a simple system that allows a user to register their punch ins and
 
 # How to setup
 
+1. Copy the project and install its dependencies:
+
+    <code>git clone git@github.com:lucascaton/time_clock.git ~/time_clock</code>
+
+    <code>cd ~/time_clock</code>
+
+    <code>bundle install</code>
+
+2. Copy and edit the database configs:
+
+    <code>cp config/database.yml.example config/database.yml</code>
+
+3. Copy and edit the application configs (You must choose a username and password that will access the application):
+
+    <code>cp config/application.yml.example config/application.yml</code>
+
+4. Run <code>rake db:setup</code> in order to setup database;
+
+5. Start the aplication: <code>rails server</code> and done! You're ready to access the application:
+
+    <pre>http://localhost:3000</pre>
+
 # Screenshots
 
 ![Screenshot browser](https://raw.github.com/lucascaton/time_clock/master/screenshots/screenshot_browser.png)
