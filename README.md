@@ -1,6 +1,6 @@
 # Time Clock
 
-Time Clock is a simple system that allows a user to register their punch ins and punch outs of the work environment in order to manage their hours worked.
+Time Clock is a simple system that allows an user to register their punch ins and punch outs of the work environment in order to manage their hours worked.
 
 # How to setup
 
@@ -16,7 +16,7 @@ Time Clock is a simple system that allows a user to register their punch ins and
 
     <code>cp config/database.yml.example config/database.yml</code>
 
-3. Copy and edit the application configs (You must choose a username and password that will access the application):
+3. Copy and edit the application configs (You must choose an username and password that will access the application):
 
     <code>cp config/application.yml.example config/application.yml</code>
 
