@@ -1,0 +1,5 @@
+#! /bin/bash
+
+kill `cat tmp/pids/unicorn.pid`
+sleep 5
+bundle exec unicorn -c config/unicorn.rb -E production -D
