@@ -20,7 +20,7 @@ class Punch < ActiveRecord::Base
 
     return "- #{balance}" if balance_in_seconds > 0
     return "+ #{balance}" if balance_in_seconds < 0
-    'OK'
+    '-'
   end
 
   private

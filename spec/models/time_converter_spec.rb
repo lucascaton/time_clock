@@ -2,6 +2,12 @@ require File.expand_path('../../../app/models/time_converter', __FILE__)
 
 describe TimeConverter do
   describe '#to_time' do
+    it 'returns a dash' do
+      seconds = 0 # 0 seconds
+      time_converted = TimeConverter.new(seconds).to_time
+      expect(time_converted).to eql('-')
+    end
+
     it 'returns a formatted time' do
       seconds = 1 # 1 second
       time_converted = TimeConverter.new(seconds).to_time

@@ -6,6 +6,8 @@ class TimeConverter
   # Code adapted from:
   # http://stufftohelpyouout.blogspot.com.br/2010/02/seconds-to-days-minutes-hours-seconds.html
   def to_time
+    return '-' if @seconds.zero?
+
     days    = @seconds / 86400
     hours   = (@seconds / 3600) - (days * 24)
     minutes = (@seconds / 60) - (hours * 60) - (days * 1440)

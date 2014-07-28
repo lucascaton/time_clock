@@ -4,8 +4,8 @@ describe Punch do
   describe 'validations' do
     context 'when there is already a punch at the same time' do
       it 'is invalid' do
-        create :punch, punched_at: Time.local(*%w(2013 03 16 08 00))
-        new_punch = build :punch, punched_at: Time.local(*%w(2013 03 16 08 00))
+        create :punch, punched_at: Time.utc(*%w(2013 03 16 08 00))
+        new_punch = build :punch, punched_at: Time.utc(*%w(2013 03 16 08 00))
         expect(new_punch).to be_invalid
         expect(new_punch.errors[:punched_at]).to eql(['has already been taken'])
       end
@@ -15,8 +15,8 @@ describe Punch do
   describe 'callbacks' do
     describe 'on creation' do
       it 'removes seconds from punched_at' do
-        punch = create :punch, punched_at: Time.local(*%w(2013 03 16 08 00 45))
-        expect(punch.punched_at).to eql(Time.local(*%w(2013 03 16 08 00 00)))
+        punch = create :punch, punched_at: Time.utc(*%w(2013 03 16 08 00 45))
+        expect(punch.punched_at).to eql(Time.utc(*%w(2013 03 16 08 00 00)))
       end
     end
   end
@@ -24,8 +24,8 @@ describe Punch do
   describe 'scopes' do
     describe '.by_date' do
       it 'returns only punches from a given date' do
-        punch_1 = create :punch, punched_at: Time.local(*%w(2013 03 15))
-        punch_2 = create :punch, punched_at: Time.local(*%w(2013 03 16))
+        punch_1 = create :punch, punched_at: Time.utc(*%w(2013 03 15))
+        punch_2 = create :punch, punched_at: Time.utc(*%w(2013 03 16))
 
         date = Date.new 2013, 03, 16
         expect(described_class.by_date(date)).to eq([punch_2])
@@ -34,9 +34,9 @@ describe Punch do
 
     describe '.ordered' do
       it 'returns punches ordered' do
-        punch_1 = create :punch, punched_at: Time.local(*%w(2013 03 16 08 00))
-        punch_2 = create :punch, punched_at: Time.local(*%w(2013 03 16 04 00))
-        punch_3 = create :punch, punched_at: Time.local(*%w(2013 03 16 06 00))
+        punch_1 = create :punch, punched_at: Time.utc(*%w(2013 03 16 08 00))
+        punch_2 = create :punch, punched_at: Time.utc(*%w(2013 03 16 04 00))
+        punch_3 = create :punch, punched_at: Time.utc(*%w(2013 03 16 06 00))
 
         expect(described_class.ordered).to eq([punch_1, punch_3, punch_2])
       end
@@ -45,10 +45,10 @@ describe Punch do
 
   describe '.worked_time' do
     before do
-      create :punch, punched_at: Time.local(*%w(2013 03 15 08 00))
-      create :punch, punched_at: Time.local(*%w(2013 03 15 16 05))
-      create :punch, punched_at: Time.local(*%w(2013 03 16 08 00))
-      create :punch, punched_at: Time.local(*%w(2013 03 16 17 05))
+      create :punch, punched_at: Time.utc(*%w(2013 03 15 08 00))
+      create :punch, punched_at: Time.utc(*%w(2013 03 15 16 05))
+      create :punch, punched_at: Time.utc(*%w(2013 03 16 08 00))
+      create :punch, punched_at: Time.utc(*%w(2013 03 16 17 05))
     end
 
     context 'without a date' do
@@ -67,10 +67,10 @@ describe Punch do
 
   describe '.worked_time_balance' do
     before do
-      create :punch, punched_at: Time.local(*%w(2013 03 15 08 00))
-      create :punch, punched_at: Time.local(*%w(2013 03 15 16 05))
-      create :punch, punched_at: Time.local(*%w(2013 03 16 08 00))
-      create :punch, punched_at: Time.local(*%w(2013 03 16 17 05))
+      create :punch, punched_at: Time.utc(*%w(2013 03 15 08 00))
+      create :punch, punched_at: Time.utc(*%w(2013 03 15 16 05))
+      create :punch, punched_at: Time.utc(*%w(2013 03 16 08 00))
+      create :punch, punched_at: Time.utc(*%w(2013 03 16 17 05))
     end
 
     context 'without a date' do
@@ -88,19 +88,19 @@ describe Punch do
 
     context 'with a negative balance' do
       it 'returns a string with the worked time balance' do
-        create :punch, punched_at: Time.local(*%w(2013 03 17 08 00))
-        create :punch, punched_at: Time.local(*%w(2013 03 17 09 00))
+        create :punch, punched_at: Time.utc(*%w(2013 03 17 08 00))
+        create :punch, punched_at: Time.utc(*%w(2013 03 17 09 00))
 
         expect(described_class.worked_time_balance).to eql('- 5 hours, 50 minutes')
       end
     end
 
     context 'with a perfect balance' do
-      it 'returns "OK"' do
-        create :punch, punched_at: Time.local(*%w(2013 03 17 08 00))
-        create :punch, punched_at: Time.local(*%w(2013 03 17 14 50))
+      it 'returns a dash' do
+        create :punch, punched_at: Time.utc(*%w(2013 03 17 08 00))
+        create :punch, punched_at: Time.utc(*%w(2013 03 17 14 50))
 
-        expect(described_class.worked_time_balance).to eql('OK')
+        expect(described_class.worked_time_balance).to eql('-')
       end
     end
   end

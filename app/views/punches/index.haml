@@ -5,8 +5,16 @@
       %br
       =f.submit 'Punch!', class: 'btn btn-success'
 
-.well.center
-  %h2=Punch.worked_time_balance
+.row
+  .span6
+    #remaining.well.center
+      %strong Remaining:
+      %h2= Punch.worked_time_balance
+
+  .span6
+    #total.well.center
+      %strong Total:
+      %h2= Punch.worked_time
 
 -@punches.group_by{ |punch| punch.punched_at.to_date }.each do |date, punches|
   .pull-left

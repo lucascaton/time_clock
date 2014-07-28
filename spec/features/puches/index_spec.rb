@@ -5,13 +5,13 @@ describe 'Punches#index', type: :feature do
   before { authenticate }
 
   it 'shows the worked times' do
-    create :punch, punched_at: Time.local(*%w(2013 03 15 08 00))
-    create :punch, punched_at: Time.local(*%w(2013 03 15 16 05))
-    create :punch, punched_at: Time.local(*%w(2013 03 16 08 00))
-    create :punch, punched_at: Time.local(*%w(2013 03 16 17 05))
+    create :punch, punched_at: Time.utc(*%w(2013 03 15 08 00))
+    create :punch, punched_at: Time.utc(*%w(2013 03 15 16 05))
+    create :punch, punched_at: Time.utc(*%w(2013 03 16 08 00))
+    create :punch, punched_at: Time.utc(*%w(2013 03 16 17 05))
 
     visit root_path
-    expect(find('.well.center h2')).to have_content('+ 1 hour, 10 minutes')
+    expect(find('#remaining')).to have_content('+ 1 hour, 10 minutes')
     expect(page).to have_content('2013-03-16 (9 hours, 5 minutes)')
     expect(page).to have_content('2013-03-15 (8 hours, 5 minutes)')
   end
@@ -30,7 +30,7 @@ describe 'Punches#index', type: :feature do
   end
 
   it 'deletes a punch' do
-    create :punch, punched_at: Time.local(*%w(2013 03 16 08 00))
+    create :punch, punched_at: Time.utc(*%w(2013 03 16 08 00))
 
     visit root_path
     expect { click_link 'Remove' }.to change(Punch, :count).from(1).to(0)
