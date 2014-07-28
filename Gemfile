@@ -11,7 +11,6 @@ gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
 
 group :development do
-  gem 'annotate'
   gem 'better_errors'
   gem 'thin'
   gem 'meta_request'

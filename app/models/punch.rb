@@ -1,14 +1,3 @@
-# == Schema Information
-#
-# Table name: punches
-#
-#  id         :integer          not null, primary key
-#  origin_ip  :string(255)
-#  punched_at :datetime
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
 class Punch < ActiveRecord::Base
   attr_accessible :origin_ip, :punched_at
 
